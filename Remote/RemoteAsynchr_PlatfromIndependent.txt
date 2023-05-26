@@ -1,0 +1,20 @@
+@startuml
+participant "Component\nA"  as CompA
+participant "Component\nB" as CompB
+participant "RemoteTXChannel\nA" as RTXChA
+participant "Remote\nComponent A\nInterface" as RCompA
+participant "LocalTXChannel\nB" as LTXChB
+
+participant CompA order 10
+participant RTXChA order 50
+participant RCompA order 70
+participant LTXChB order 80
+participant CompB order 100
+
+autonumber
+
+CompA -> RTXChA: Send
+RTXChA --> RCompA: Send
+RCompA -> LTXChB: Send
+LTXChB -> CompB : Send
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+participant "Component A\nInterface" as CompA
+participant "Component B\nInterface" as CompB
+participant "LocalTXChannel" as LTXCh
+
+participant CompA order 10
+participant LTXCh order 20
+participant CompB order 30
+
+autonumber
+
+CompA -> LTXCh : Send
+LTXCh -> CompB : Send
+@enduml

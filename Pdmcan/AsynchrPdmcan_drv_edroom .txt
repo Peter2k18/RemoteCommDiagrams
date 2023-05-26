@@ -1,0 +1,28 @@
+@startuml
+participant "RemoteTXChannel\nA" as RTXChA
+participant "Remote\nComponent A\nInterface" as RCompA
+participant "PDMCAN\nA" as PCANA
+participant "PDMCAN\nB" as PCANB
+participant CAN
+participant "IRQHandler\nB" as IRQB
+participant "IRQBottomHalfTask\nB" as IRQBHB
+
+participant RTXChA order 10
+participant PCANA order 20
+participant CAN order 30
+participant PCANB order 40
+participant IRQB order 50
+participant IRQBHB order 60
+participant RCompA order 70
+
+autonumber
+
+RTXChA -> PCANA : pdmcan_drv_send_edroom_message
+PCANA -> CAN : Several CAN Messages
+CAN -> PCANB : Several CAN Messages
+PCANB -> IRQB : 0x1C
+IRQB -> IRQBHB : Signal
+IRQBHB -> PCANB : pdmcan_drv_read_edroom_msg
+PCANB --> IRQBHB
+IRQBHB -> RCompA : Send
+@enduml

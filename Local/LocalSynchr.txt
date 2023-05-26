@@ -1,0 +1,18 @@
+@startuml
+participant "Component A\nInterface" as CompA
+participant "Component B\nInterface" as CompB
+participant "LocalTXChannel" as LTXCh
+participant "Synchr\nMessage" as SyncMsg
+
+participant CompA order 10
+participant LTXCh order 20
+participant SyncMsg order 30
+participant CompB order 40
+
+autonumber
+
+CompA -> LTXCh : Invoke
+LTXCh -> CompB : Invoke
+CompB -> SyncMsg : Reply
+SyncMsg -> CompA : Reply
+@enduml
