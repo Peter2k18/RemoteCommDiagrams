@@ -1,0 +1,21 @@
+@startuml
+binary "clk" as C0
+concise "Input" as IN
+
+scale 5 as 50 pixels
+@0
+IN is {-}
+C0 is low
+@+16
+IN is "Input Valid"
+
+IN@+0 <-> @+9 : Setup
+IN@+9 <-> @+9 : Hold
+
+@+9
+C0 is high
+
+@+9
+IN is {-}
+@+16
+@enduml

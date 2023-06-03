@@ -1,0 +1,65 @@
+@startuml
+clock "clk" as C0 with period 50
+binary "CAN IRQ" as IRQ
+concise "CAN Status Register" as CANRS
+binary "PDMCAN IRQ Detection" as IRQDet
+binary "IRQ Clear" as IRQC
+concise "PDMCAN State" as PDMCANFSM
+
+scale 100 as 50 pixels
+@0
+IRQ is low
+IRQDet is low
+PDMCANFSM is Idle
+CANRS is Idle
+IRQC is low
+
+@50
+IRQ is high
+CANRS is "MSG Received"
+
+@100
+IRQ is low
+IRQDet is high
+
+@150
+PDMCANFSM is Check
+PDMCANFSM -> CANRS
+
+@300
+PDMCANFSM is Read
+
+@400
+IRQ is high
+
+@450
+IRQ is low
+
+@450
+PDMCANFSM is Clear
+IRQC is high
+
+@500
+IRQDet is low
+
+@600
+PDMCANFSM is Check
+PDMCANFSM -> CANRS
+IRQC is low
+
+@750
+PDMCANFSM is Read
+
+@900
+PDMCANFSM is Clear
+IRQC is high
+CANRS is Idle
+
+@1050
+PDMCANFSM is Check
+PDMCANFSM -> CANRS
+IRQC is low
+
+@1200
+PDMCANFSM is Idle
+@enduml
