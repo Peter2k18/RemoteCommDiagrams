@@ -1,0 +1,22 @@
+@startuml
+participant "Component A\nInterface"  as CompA
+participant "Component B\nInterface" as CompB
+participant "RemoteTXChannel\nA" as RTXChA
+participant "Remote\nComponent A\nInterface" as RCompA
+participant "LocalTXChannel\nB" as LTXChB
+participant "Synchr\nMessage A" as SyncMsgA
+
+participant CompA order 10
+participant SyncMsgA order 20
+participant RTXChA order 30
+participant RCompA order 40
+participant LTXChB order 50
+participant CompB order 60
+
+autonumber
+
+CompA -> RTXChA: Invoke
+RTXChA --> RCompA: Invoke_from_remote
+RCompA -> LTXChB: Invoke_from_remote
+LTXChB -> CompB : Invoke
+@enduml
