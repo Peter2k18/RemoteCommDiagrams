@@ -1,38 +1,22 @@
 @startuml
-participant "RemoteTXChannel\nA" as RTXChA
 participant "RemoteTXChannel\nB" as RTXChB
-participant "Remote\nComponent A\nInterface" as RCompA
 participant "Remote\nComponent B\nInterface" as RCompB
 participant "PDMCAN\nA" as PCANA
 participant CAN
 participant "PDMCAN\nB" as PCANB
 participant "IRQHandler\nA" as IRQA
-participant "IRQHandler\nB" as IRQB
 participant "IRQBottomHalfTask\nA" as IRQBHA
-participant "IRQBottomHalfTask\nB" as IRQBHB
 
 participant RCompB order 10
-participant RTXChA order 20
 participant IRQBHA order 30
 participant IRQA order 40
 participant PCANA order 50
 participant CAN order 60
 participant PCANB order 70
-participant IRQB order 80
-participant IRQBHB order 90
 participant RTXChB order 100
-participant RCompA order 110
 
 autonumber
 
-RTXChA -> PCANA : pdmcan_drv_send_edroom_message
-PCANA -> CAN : Several CAN Messages
-CAN -> PCANB : Several CAN Messages
-PCANB -> IRQB : 0x1C
-IRQB -> IRQBHB : Signal
-IRQBHB -> PCANB : pdmcan_drv_read_edroom_msg
-PCANB --> IRQBHB
-IRQBHB -> RCompA : Invoke_from_remote
 RTXChB -> PCANB : pdmcan_drv_send_edroom_message
 PCANB -> CAN : Several CAN Messages
 CAN -> PCANA : Several CAN Messages
