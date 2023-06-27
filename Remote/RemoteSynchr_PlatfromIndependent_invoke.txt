@@ -7,11 +7,10 @@ participant "LocalTXChannel\nB" as LTXChB
 participant "Synchr\nMessage A" as SyncMsgA
 
 participant CompA order 10
-participant SyncMsgA order 20
-participant RTXChA order 30
-participant RCompA order 40
-participant LTXChB order 50
-participant CompB order 60
+participant RTXChA order 20
+participant RCompA order 30
+participant LTXChB order 40
+participant CompB order 50
 
 autonumber
 
